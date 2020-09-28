@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { PageHeader, Typography, Row, Col } from 'antd';
+import { PageHeader, Typography, Row, Col, message } from 'antd';
 import './main.css'
 import AddTodoForm from './Components/AddTodoForm';
 import TodoList from './Components/TodoList';
@@ -76,6 +76,20 @@ function App() {
     })
   }
 
+  const setUpdateIsComplete = (checked,index) => {
+    setTodos(prevState => {
+      prevState.forEach((item, idx) => {
+        if(idx === index){
+          prevState[index].isComplete = checked
+        }
+      })
+
+      return [...prevState]
+    })
+
+    message.success('Update ข้อมูลเรียบร้อย')
+  }
+
   return (
     <div className="main-div">
       <PageHeader
@@ -105,7 +119,7 @@ function App() {
             <AddTodoForm addTodos={addTodos} todos={todos}/>
           </Row>
           <Row style={{ marginBottom: 15 }}>
-            <TodoList todos={todos} removeTodo={removeTodo}/>
+            <TodoList todos={todos} removeTodo={removeTodo} setUpdateIsComplete={setUpdateIsComplete}/>
           </Row>
         </Content>
       </PageHeader>

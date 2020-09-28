@@ -3,10 +3,14 @@ import { List } from 'antd'
 import TodoItem from './TodoItem'
 
 const TodoList = (props) => {
-    const { todos, removeTodo } = props
+    const { todos, removeTodo,setUpdateIsComplete } = props
 
     const removeTodoItem = (idx) => {
         removeTodo(idx)
+    }
+
+    const updateIsComplete = (checked, index) => {
+        setUpdateIsComplete(checked,index)
     }
 
     return (
@@ -22,6 +26,7 @@ const TodoList = (props) => {
                         index={index}
                         todo={todo}
                         removeTodoItem={removeTodoItem}
+                        updateIsComplete={updateIsComplete}
                     />
                 )}
                 pagination={{
